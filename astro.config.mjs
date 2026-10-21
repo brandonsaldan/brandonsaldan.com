@@ -3,7 +3,6 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
-import tailwind from '@astrojs/tailwind';
 import vercel from '@astrojs/vercel';
 
 const frontmatterDate = (source, key) => source.match(new RegExp(`^${key}:\\s*["']?([^"'\\n]+)`, 'm'))?.[1];
@@ -35,7 +34,6 @@ const vercelRoutes = () => ({
         'astro:build:done': async () => {
             const configPath = new URL('./.vercel/output/config.json', import.meta.url);
             const config = JSON.parse(await readFile(configPath, 'utf8'));
-            const routes = config.routes.filter((route) => route.src !== '^/_astro/(.*)$');
             config.routes = [
                 {
                     src: '^/(.*)$',
@@ -49,11 +47,6 @@ const vercelRoutes = () => ({
                     status: 308
                 },
                 {
-                    src: '^/_astro/(.*)$',
-                    headers: { 'cache-control': 'public, max-age=31536000, immutable' },
-                    continue: true
-                },
-                {
                     src: '^/(.*)$',
                     headers: {
                         'X-Content-Type-Options': 'nosniff',
@@ -61,7 +54,7 @@ const vercelRoutes = () => ({
                     },
                     continue: true
                 },
-                ...routes
+                ...config.routes
             ];
             await writeFile(configPath, JSON.stringify(config, null, 2));
         }
@@ -83,9 +76,6 @@ export default defineConfig({
                 const date = lastModified.get(new URL(item.url).pathname);
                 return date ? { ...item, lastmod: date.toISOString() } : item;
             }
-        }),
-        tailwind({
-            applyBaseStyles: false
         }),
         vercelRoutes()
     ]
