@@ -2,6 +2,8 @@
 import type { GetStaticPathsOptions, Page } from 'astro';
 import { type CollectionEntry, getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { ogCard } from '../../utils/image-utils';
+import { personRef } from '../../utils/structured-data';
 import Pagination from '../../components/Pagination.astro';
 import PostPreview from '../../components/PostPreview.astro';
 import PreviewBlock from '../../components/PreviewBlock.astro';
@@ -22,7 +24,8 @@ const blog = page.data;
 <BaseLayout
     title="Blog"
     description="Writing on technology, the projects I build, and the research I publish. Most posts start from something I’ve made or a paper I’ve written."
-    image={{ src: '/og/blog.png', alt: 'Blog' }}
+    image={ogCard('blog', 'Blog')}
+    page={{ '@type': 'CollectionPage', about: personRef }}
     showHeader={false}
 >
     <h1 class="mb-3 text-4xl leading-tight font-serif italic sm:mb-4 sm:text-4xl">Blog</h1>

@@ -1,10 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { ogCard } from '../utils/image-utils';
 ---
 
 <BaseLayout
   title="Listening"
-  image={{ src: '/og/listening.png', alt: 'Listening' }}
+  image={ogCard('listening', 'Listening')}
   description="A live look at what Brandon Saldan is listening to, from the records in rotation to the latest track."
   showHeader={false}
 >

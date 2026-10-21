@@ -3,7 +3,8 @@ import { type CollectionEntry, getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Button from '../../components/Button.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
-import { socialImage } from '../../utils/image-utils';
+import { ogCard, socialImage } from '../../utils/image-utils';
+import { breadcrumbs, personRef, projectRef } from '../../utils/structured-data';
 
 export async function getStaticPaths() {
     return (await getCollection('projects')).map((project) => ({
@@ -21,13 +22,32 @@ const readingTime = Math.max(1, Math.ceil((project.body || '').trim().split(/\s+
 const separatorIndex = rawTitle.indexOf(' - ');
 const title = separatorIndex === -1 ? rawTitle : rawTitle.slice(0, separatorIndex);
 const subtitle = separatorIndex === -1 ? undefined : rawTitle.slice(separatorIndex + 3);
+const pageURL = new URL(`/projects/${project.id}/`, Astro.site).href;
+const social = (await socialImage(seo?.image)) ?? ogCard(`projects/${project.id}`, title);
+const schema = [
+    {
+        '@type': 'SoftwareSourceCode',
+        ...projectRef(project.id),
+        name: title,
+        alternateName: rawTitle,
+        description,
+        url: website ?? pageURL,
+        image: new URL(social.src, Astro.site).href,
+        codeRepository: repository,
+        sameAs: website && repository,
+        author: personRef,
+        dateCreated: publishDate.toISOString().slice(0, 10),
+        mainEntityOfPage: { '@id': `${pageURL}#webpage` }
+    },
+    breadcrumbs(pageURL, [['Projects', '/projects/'], [title, `/projects/${project.id}/`]])
+];
 ---
 
-<BaseLayout title={seo?.title ?? rawTitle} description={seo?.description ?? description} image={(await socialImage(seo?.image)) ?? { src: `/og/projects/${project.id}.png`, alt: title }} pageType="article" showHeader={false}>
+<BaseLayout title={seo?.title ?? rawTitle} description={seo?.description ?? description} image={social} pageType="article" page={{ breadcrumb: { '@id': `${pageURL}#breadcrumb` } }} schema={schema} showHeader={false}>
     <article class="mb-16 sm:mb-24">
         <header class="mb-8 sm:mb-12">
             <h1 class="text-3xl leading-tight font-serif font-medium sm:text-5xl sm:leading-tight">
-                {title}
+                {title}{subtitle && <span class="sr-only">: </span>}
                 {subtitle && <span class="mt-4 block text-xl leading-snug font-normal sm:text-2xl">{subtitle}</span>}
             </h1>
         </header>

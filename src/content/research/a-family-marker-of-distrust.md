@@ -26,6 +26,7 @@ replicationUrl: "https://works.hcommons.org/records/0nwbw-8j163/files/Saldan_Mat
 readingTime: 82
 isFeatured: true
 seo:
+  title: "Maternal Smoking and Trust in Government"
   description: "Brandon Saldan studies maternal smoking during pregnancy as a family marker of lower perceived federal government responsiveness in adulthood."
 ---
 

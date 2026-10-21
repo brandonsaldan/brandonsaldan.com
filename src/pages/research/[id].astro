@@ -3,8 +3,9 @@ import { getCollection, render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Button from '../../components/Button.astro';
 import { formatResearchDate, researchCitation } from '../../utils/research-utils';
-import { socialImage } from '../../utils/image-utils';
+import { ogCard, socialImage } from '../../utils/image-utils';
 import { orcid } from '../../data/site-config';
+import { breadcrumbs, personRef } from '../../utils/structured-data';
 
 export async function getStaticPaths() {
     return (await getCollection('research')).map((paper) => ({
@@ -20,25 +21,28 @@ const citation = researchCitation(paper);
 const pageURL = new URL(`/research/${paper.id}/`, Astro.site).href;
 const companionPost = (await getCollection('blog')).find((post) => post.data.repository?.href === pageURL);
 const pdfURL = new URL(pdfUrl, Astro.site).href;
-const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'ScholarlyArticle',
-    headline: title,
-    author: { '@type': 'Person', name: 'Brandon Saldan', url: new URL('/', Astro.site).href, sameAs: orcid },
-    datePublished: publishDate.toISOString().slice(0, 10),
-    description: excerpt,
-    url: pageURL,
-    mainEntityOfPage: pageURL,
-    identifier: { '@type': 'PropertyValue', propertyID: 'DOI', value: doi },
-    sameAs: [`https://doi.org/${doi}`, ...Object.values(repositories)],
-    encoding: { '@type': 'MediaObject', contentUrl: pdfURL, encodingFormat: 'application/pdf' },
-    keywords: frameworks.join(', '),
-    inLanguage: 'en'
-};
+const schema = [
+    {
+        '@type': 'ScholarlyArticle',
+        '@id': `${pageURL}#article`,
+        headline: title,
+        author: personRef,
+        datePublished: publishDate.toISOString().slice(0, 10),
+        description: excerpt,
+        url: pageURL,
+        mainEntityOfPage: { '@id': `${pageURL}#webpage` },
+        identifier: { '@type': 'PropertyValue', propertyID: 'DOI', value: doi },
+        sameAs: [`https://doi.org/${doi}`, ...Object.values(repositories)],
+        encoding: { '@type': 'MediaObject', contentUrl: pdfURL, encodingFormat: 'application/pdf' },
+        keywords: frameworks.join(', '),
+        inLanguage: 'en'
+    },
+    breadcrumbs(pageURL, [['Research', '/research/'], [shortTitle, `/research/${paper.id}/`]])
+];
 const linkClasses = 'underline decoration-dashed decoration-1 underline-offset-2 hover:decoration-solid';
 ---
 
-<BaseLayout title={paper.data.seo?.title ?? shortTitle} description={paper.data.seo?.description ?? excerpt} image={(await socialImage(paper.data.seo?.image)) ?? { src: `/og/research/${paper.id}.png`, alt: shortTitle }} pageType="article" showHeader={false}>
+<BaseLayout title={paper.data.seo?.title ?? shortTitle} description={paper.data.seo?.description ?? excerpt} image={(await socialImage(paper.data.seo?.image)) ?? ogCard(`research/${paper.id}`, shortTitle)} pageType="article" page={{ breadcrumb: { '@id': `${pageURL}#breadcrumb` } }} schema={schema} showHeader={false}>
     <Fragment slot="head">
         <meta name="citation_title" content={title} />
         <meta name="citation_author" content="Brandon Saldan" />
@@ -47,7 +51,6 @@ const linkClasses = 'underline decoration-dashed decoration-1 underline-offset-2
         <meta name="citation_doi" content={doi} />
         <meta name="citation_pdf_url" content={pdfURL} />
         <meta name="citation_abstract_html_url" content={pageURL} />
-        <script type="application/ld+json" set:html={JSON.stringify(structuredData).replaceAll('<', '\\u003c')} />
     </Fragment>
 
     <article>

@@ -10,6 +10,7 @@ focus: "Embedded Systems & Open Source"
 repository: "https://github.com/usenocturne"
 isFeatured: true
 seo:
+  title: "Nocturne: Custom Firmware for Spotify Car Thing"
   image:
     src: "../../assets/projects/nocturne/nocturne-1.png"
     alt: "Nocturne running on Spotify Car Thing hardware"

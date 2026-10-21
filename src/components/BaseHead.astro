@@ -2,26 +2,51 @@
 import interWoff2 from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
 import newsreaderWoff2 from '@fontsource-variable/newsreader/files/newsreader-latin-wght-normal.woff2?url';
 import siteConfig from '../data/site-config';
+import { mergeGraph, person, serialize, website, websiteRef, type SchemaNode } from '../utils/structured-data';
 import '../styles/global.css';
 
 export type Props = {
     title?: string;
     description?: string;
-    image?: { src: string; alt?: string };
+    image?: { src: string; alt?: string; width?: number; height?: number };
     pageType?: 'website' | 'article';
     noindex?: boolean;
+    page?: SchemaNode;
+    schema?: SchemaNode[];
 };
 
-const { description = '', image = siteConfig.image, pageType = 'website', noindex = false } = Astro.props;
+const { description = '', image = siteConfig.image, pageType = 'website', noindex = false, page, schema = [] } = Astro.props;
 const title = [Astro.props.title, siteConfig.title].filter(Boolean).join(' | ');
 const resolvedImage = image?.src
     ? {
           src: new URL(image.src, Astro.site).toString(),
-          alt: image.alt
+          alt: image.alt,
+          width: image.width,
+          height: image.height
       }
     : undefined;
 const pathname = Astro.url.pathname;
 const canonicalURL = new URL(pathname.endsWith('/') || pathname.endsWith('.html') ? pathname : `${pathname}/`, Astro.site).href;
+const twitter = siteConfig.socialLinks?.find(({ text }) => text === 'Twitter');
+const twitterHandle = twitter && `@${new URL(twitter.href).pathname.split('/').filter(Boolean).pop()}`;
+const structuredData = {
+    '@context': 'https://schema.org',
+    '@graph': mergeGraph([
+        website,
+        person,
+        {
+            '@type': 'WebPage',
+            '@id': `${canonicalURL}#webpage`,
+            url: canonicalURL,
+            name: title,
+            description: description || undefined,
+            isPartOf: websiteRef,
+            inLanguage: 'en',
+            ...page
+        },
+        ...schema
+    ])
+};
 ---
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -35,20 +60,28 @@ const canonicalURL = new URL(pathname.endsWith('/') || pathname.endsWith('.html'
 <link rel="sitemap" href="/sitemap-index.xml" />
 <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS" />
 
-<link rel="canonical" href={canonicalURL} />
+{!noindex && <link rel="canonical" href={canonicalURL} />}
 <meta name="description" content={description} />
 {noindex && <meta name="robots" content="noindex" />}
 
+<meta property="og:site_name" content={siteConfig.title} />
+<meta property="og:locale" content="en_US" />
 <meta property="og:type" content={pageType} />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 {resolvedImage?.src && <meta property="og:image" content={resolvedImage.src} />}
+{resolvedImage?.width && <meta property="og:image:width" content={String(resolvedImage.width)} />}
+{resolvedImage?.height && <meta property="og:image:height" content={String(resolvedImage.height)} />}
 {resolvedImage?.alt && <meta property="og:image:alt" content={resolvedImage.alt} />}
 
 <meta name="twitter:card" content="summary_large_image" />
+{twitterHandle && <meta name="twitter:site" content={twitterHandle} />}
+{twitterHandle && <meta name="twitter:creator" content={twitterHandle} />}
 <meta name="twitter:url" content={canonicalURL} />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 {resolvedImage?.src && <meta name="twitter:image" content={resolvedImage.src} />}
 {resolvedImage?.alt && <meta name="twitter:image:alt" content={resolvedImage.alt} />}
+
+{!noindex && <script type="application/ld+json" set:html={serialize(structuredData)} />}

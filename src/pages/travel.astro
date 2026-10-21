@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { ogCard } from '../utils/image-utils';
 import TripCollage from '../components/TripCollage.astro';
 import travelData from '../data/travel-data';
 
@@ -147,8 +148,8 @@ const journeyGroups = Array.from(
 
 <BaseLayout
   title="Travel"
-  description="A personal index of trips taken and places still on my mind."
-  image={{ src: '/og/travel.png', alt: 'Travel' }}
+  description="Brandon Saldan’s personal travel index: standout trips, countries visited, a full route log, and places still on my mind."
+  image={ogCard('travel', 'Travel')}
   showHeader={false}
 >
   <h1 class="mb-3 text-4xl leading-tight font-serif italic sm:mb-4 sm:text-4xl">Travel</h1>

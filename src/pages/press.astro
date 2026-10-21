@@ -1,6 +1,9 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { ogCard } from '../utils/image-utils';
 import { press, type PressMention } from '../data/press';
+import { absoluteURL, personRef, projectRef } from '../utils/structured-data';
 
 const description = 'Every so often my work ends up somewhere I didn’t expect. Here’s where it’s been written about, quoted, or talked through on air.';
 const formatDate = (date: string) => new Date(`${date}T12:00:00Z`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
@@ -11,9 +14,54 @@ const headline = (item: PressMention) => {
     const at = text.lastIndexOf(' ');
     return { lead: text.slice(0, at + 1), last: text.slice(at + 1) };
 };
+const pageURL = absoluteURL('/press/');
+const youtubeID = (href: string) => {
+    const url = new URL(href);
+    if (!url.hostname.endsWith('youtube.com')) return undefined;
+    return url.searchParams.get('v') ?? url.pathname.split('/').pop();
+};
+const coverage = [...featured, ...more].map((item) => {
+    const video = youtubeID(item.href);
+    return {
+        '@type': video ? 'VideoObject' : 'NewsArticle',
+        '@id': `${pageURL}#${item.outlet.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
+        ...(video
+            ? { name: item.title, url: `https://www.youtube.com/watch?v=${video}`, embedUrl: `https://www.youtube.com/embed/${video}`, thumbnailUrl: `https://i.ytimg.com/vi/${video}/hqdefault.jpg`, uploadDate: item.date }
+            : { headline: item.title, url: item.href, datePublished: item.date }),
+        author: item.author ? { '@type': 'Person', name: item.author } : undefined,
+        publisher: { '@type': 'Organization', name: item.outlet },
+        about: projectRef(item.project),
+        mentions: item.namesMe ? personRef : undefined
+    };
+});
+const projects = (await getCollection('projects')).filter(({ id }) => press.some(({ project }) => project === id));
+const schema = [
+    {
+        '@type': 'ItemList',
+        '@id': `${pageURL}#coverage`,
+        name: 'Press coverage',
+        numberOfItems: coverage.length,
+        itemListElement: coverage.map((item, index) => ({ '@type': 'ListItem', position: index + 1, item }))
+    },
+    ...projects.map(({ id, data }) => ({
+        '@type': 'SoftwareSourceCode',
+        ...projectRef(id),
+        name: data.title.split(' - ')[0],
+        url: data.website ?? absoluteURL(`/projects/${id}/`),
+        author: personRef
+    })),
+    { ...personRef, subjectOf: coverage.filter(({ mentions }) => mentions).map((item) => ({ '@id': item['@id'] })) }
+];
 ---
 
-<BaseLayout title="Press" image={{ src: '/og/press.png', alt: 'Press' }} description="Where Brandon Saldan’s work has been written about, quoted, or discussed." showHeader={false}>
+<BaseLayout
+    title="Press"
+    image={ogCard('press', 'Press')}
+    description="Press coverage of Brandon Saldan’s work, including Nocturne in Ars Technica, Gizmodo, TechSpot, and Linus Tech Tips’ WAN Show."
+    page={{ '@type': 'CollectionPage', about: personRef, mainEntity: { '@id': `${pageURL}#coverage` } }}
+    schema={schema}
+    showHeader={false}
+>
     <h1 class="mb-3 text-4xl leading-tight font-serif italic sm:mb-4 sm:text-4xl">Press</h1>
     <p class="mb-10 text-base leading-relaxed sm:text-lg">{description}</p>
 

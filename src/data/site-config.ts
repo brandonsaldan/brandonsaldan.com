@@ -2,6 +2,8 @@ export type Image = {
   src: string;
   alt?: string;
   caption?: string;
+  width?: number;
+  height?: number;
 };
 
 export type Link = {
@@ -62,6 +64,8 @@ const siteConfig: SiteConfig = {
   image: {
     src: "/og/og-main.png",
     alt: "Brandon Saldan, MIS/BA @ UNC Charlotte",
+    width: 1440,
+    height: 800,
   },
   headerNavLinks: [
     {

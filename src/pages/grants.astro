@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { ogCard } from '../utils/image-utils';
 
 const applicationUrl = 'https://airtable.com/appbBigvOyUCojEAU/pagngFqHu5eeoAxhg/form';
 const grantees = [
@@ -15,7 +16,7 @@ const grantees = [
 
 <BaseLayout
     title="Grants"
-    image={{ src: '/og/grants.png', alt: 'Grants' }}
+    image={ogCard('grants', 'Grants')}
     description="Brandon Saldan helps award $100–$500 microgrants to young builders as a general partner at Bagel Fund."
     showHeader={false}
 >

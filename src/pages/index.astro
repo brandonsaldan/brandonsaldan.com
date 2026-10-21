@@ -9,8 +9,8 @@ import ProjectPreview from '../components/ProjectPreview.astro';
 import PreviewBlock from '../components/PreviewBlock.astro';
 import ResearchPreview from '../components/ResearchPreview.astro';
 import siteConfig from '../data/site-config';
-import { education, experience } from '../data/resume';
 import { sortItemsByDateDesc } from '../utils/data-utils';
+import { personRef } from '../utils/structured-data';
 
 const posts = (await getCollection('blog')).sort(sortItemsByDateDesc);
 const featuredPosts = posts.filter(({ data }) => data.isFeatured).slice(0, 3);
@@ -20,39 +20,9 @@ const featuredProjects = projects.filter(({ data }) => data.isFeatured);
 
 const research = (await getCollection('research')).sort(sortItemsByDateDesc);
 const featuredResearch = research.filter(({ data }) => data.isFeatured);
-const siteURL = new URL('/', Astro.site).href;
-const currentRole = experience.find(({ end }) => !end);
-const schools = [...new Set(education.map(({ organization }) => organization))];
-const structuredData = {
-    '@context': 'https://schema.org',
-    '@graph': [
-        {
-            '@type': 'WebSite',
-            '@id': `${siteURL}#website`,
-            url: siteURL,
-            name: siteConfig.title,
-            description: siteConfig.description,
-            publisher: { '@id': `${siteURL}#person` }
-        },
-        {
-            '@type': 'Person',
-            '@id': `${siteURL}#person`,
-            name: siteConfig.title,
-            url: siteURL,
-            description: siteConfig.description,
-            image: siteConfig.portrait && new URL(siteConfig.portrait.src, Astro.site).href,
-            jobTitle: currentRole?.title,
-            worksFor: currentRole && { '@type': 'Organization', name: currentRole.organization },
-            alumniOf: schools.map((name) => ({ '@type': 'CollegeOrUniversity', name })),
-            knowsAbout: siteConfig.topics,
-            sameAs: siteConfig.socialLinks?.map(({ href }) => href)
-        }
-    ]
-};
 ---
 
-<BaseLayout description={siteConfig.description} image={siteConfig.image} homeLayout>
-    <script slot="head" type="application/ld+json" set:html={JSON.stringify(structuredData).replaceAll('<', '\\u003c')} />
+<BaseLayout description={siteConfig.description} image={siteConfig.image} page={{ '@type': 'ProfilePage', mainEntity: personRef, about: personRef }} homeLayout>
     <Hero slot="intro" />
     <PhotoGallery slot="gallery" />
     {

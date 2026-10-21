@@ -1,6 +1,8 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { ogCard } from '../utils/image-utils';
+import { personRef } from '../utils/structured-data';
 import Button from '../components/Button.astro';
 import { certifications, education, experience, honors, lenses, projects, skills, volunteering, type ResumeEntry, type ResumeNote } from '../data/resume';
 import { sortItemsByDateDesc } from '../utils/data-utils';
@@ -69,7 +71,13 @@ const papers = await Promise.all(research.map(async (paper) => {
 }));
 ---
 
-<BaseLayout title="Résumé" image={{ src: '/og/resume.png', alt: 'Résumé' }} description={description} showHeader={false}>
+<BaseLayout
+    title="Résumé"
+    image={ogCard('resume', 'Résumé')}
+    description="Brandon Saldan’s résumé: experience, education, research, and projects across technology, data, business strategy, and policy."
+    page={{ about: personRef, mainEntity: personRef }}
+    showHeader={false}
+>
     <div class="resume-heading">
         <h1 class="text-4xl leading-tight font-serif italic sm:text-4xl">Résumé</h1>
         <Button href="/BrandonSaldanResume.pdf" download="Brandon Saldan Résumé.pdf">Download PDF</Button>

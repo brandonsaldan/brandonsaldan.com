@@ -1,6 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { ogCard } from '../utils/image-utils';
+import { personRef } from '../utils/structured-data';
 import PreviewBlock from '../components/PreviewBlock.astro';
 import ResearchPreview from '../components/ResearchPreview.astro';
 import { sortItemsByDateDesc } from '../utils/data-utils';
@@ -11,7 +13,8 @@ const papers = (await getCollection('research')).sort(sortItemsByDateDesc);
 <BaseLayout
     title="Research"
     description="Selected research and long-form inquiry by Brandon Saldan into institutions, technology, culture, and public life."
-    image={{ src: '/og/research.png', alt: 'Research' }}
+    image={ogCard('research', 'Research')}
+    page={{ '@type': 'CollectionPage', about: personRef }}
     showHeader={false}
 >
     <h1 class="mb-3 text-4xl leading-tight font-serif italic sm:mb-4 sm:text-4xl">Research</h1>

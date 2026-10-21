@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { ogCard } from '../utils/image-utils';
+import { personRef } from '../utils/structured-data';
 import siteConfig from '../data/site-config';
 import '@fontsource/anton/latin-400.css';
 import '@fontsource/yellowtail/latin-400.css';
@@ -58,7 +60,8 @@ const socialLinks = (siteConfig.socialLinks || []).map((link) => ({
 
 <BaseLayout
     title="Contact"
-    image={{ src: '/og/contact.png', alt: 'Contact' }}
+    image={ogCard('contact', 'Contact')}
+    page={{ '@type': 'ContactPage', about: personRef }}
     description="Get in touch by email or find me elsewhere online. Always glad to hear from people working on interesting problems."
     showHeader={false}
 >

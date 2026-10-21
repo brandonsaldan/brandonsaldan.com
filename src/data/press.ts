@@ -7,12 +7,15 @@ export type PressMention = {
     quote?: string;
     segment?: string;
     featured?: boolean;
+    project: string;
+    namesMe?: boolean;
 };
 
 export const press: PressMention[] = [
     {
         featured: true,
         outlet: 'Ars Technica',
+        project: 'nocturne',
         title: 'Spotify’s Car Thing, due for bricking, is getting an open source second life',
         href: 'https://arstechnica.com/gaming/2024/11/firmware-hacks-are-rejuvenating-spotifys-car-thing-before-the-company-bricks-it/',
         author: 'Kevin Purdy',
@@ -22,6 +25,7 @@ export const press: PressMention[] = [
     {
         featured: true,
         outlet: 'Gizmodo',
+        project: 'nocturne',
         title: 'The Dream of Spotify Car Thing Is Being Kept Alive by Devoted Tinkerers',
         href: 'https://gizmodo.com/spotify-car-thing-is-being-kept-alive-by-devoted-tinkerers-2000536816',
         author: 'Florence Ion',
@@ -31,6 +35,7 @@ export const press: PressMention[] = [
     {
         featured: true,
         outlet: 'Linus Tech Tips',
+        project: 'nocturne',
         title: 'The WAN Show, November 1, 2024',
         href: 'https://www.youtube.com/live/rIQlOYS5V-I?t=2048',
         author: 'Luke Lafreniere',
@@ -40,6 +45,7 @@ export const press: PressMention[] = [
     },
     {
         outlet: 'XDA Developers',
+        project: 'nocturne',
         title: 'Spotify’s Car Thing is more proof that old tech doesn’t have to go to waste',
         href: 'https://www.xda-developers.com/spotify-car-thing-proof-old-tech/',
         author: 'Adam Conway',
@@ -48,6 +54,7 @@ export const press: PressMention[] = [
     },
     {
         outlet: 'Android Authority',
+        project: 'nocturne',
         title: 'Spotify users refuse to let Car Thing die with new workarounds',
         href: 'https://www.androidauthority.com/spotify-car-thing-dead-community-workarounds-3507315/',
         author: 'Aamir Siddiqui',
@@ -56,6 +63,8 @@ export const press: PressMention[] = [
     },
     {
         outlet: 'TechSpot',
+        project: 'nocturne',
+        namesMe: true,
         title: 'Developers keep Spotify Car Thing alive with custom firmware',
         href: 'https://www.techspot.com/news/105402-developers-keep-spotify-car-thing-alive-custom-firmware.html',
         author: 'Zo Ahmed',
@@ -64,6 +73,8 @@ export const press: PressMention[] = [
     },
     {
         outlet: 'Notebookcheck',
+        project: 'nocturne',
+        namesMe: true,
         title: 'Abandoned Spotify Car Thing revived by free firmware that restores original functionality and then some',
         href: 'https://www.notebookcheck.net/Abandoned-Spotify-Car-Thing-revived-by-free-firmware-that-restores-original-functionality-and-then-some.1085973.0.html',
         author: 'Julian van der Merwe',
@@ -72,6 +83,8 @@ export const press: PressMention[] = [
     },
     {
         outlet: 'Dammit Jeff',
+        project: 'nocturne',
+        namesMe: true,
         title: 'Spotify Bricked The Car Thing, So I Hacked Mine',
         href: 'https://www.youtube.com/watch?v=vQVuGeoqyUc&t=1060s',
         date: '2024-10-30',
@@ -80,6 +93,8 @@ export const press: PressMention[] = [
     },
     {
         outlet: 'Digital Music News',
+        project: 'nocturne',
+        namesMe: true,
         title: 'An Open Source Mod for Car Thing Is Here Now — If You Like to Tinker',
         href: 'https://www.digitalmusicnews.com/2024/11/17/car-thing-open-source-mod-nocturne/',
         author: 'Ashley King',
@@ -88,6 +103,8 @@ export const press: PressMention[] = [
     },
     {
         outlet: 'QSR Magazine',
+        project: 'invii',
+        namesMe: true,
         title: 'Tech Startup Invii Announces Ecosystem of Products to Help Restaurants',
         href: 'https://www.qsrmagazine.com/news/tech-startup-invii-announces-ecosystem-products-help-restaurants/',
         date: '2022-05-16',
