@@ -35,6 +35,7 @@ export const person: SchemaNode = {
     url: siteURL,
     description: siteConfig.description,
     image: siteConfig.portrait && absoluteURL(siteConfig.portrait.src),
+    homeLocation: { '@type': 'Place', name: 'Chapel Hill, North Carolina' },
     jobTitle: currentRole?.title,
     worksFor: currentRole && { '@type': 'Organization', name: currentRole.organization },
     affiliation: schools(false),
