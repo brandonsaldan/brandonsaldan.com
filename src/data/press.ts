@@ -102,6 +102,16 @@ export const press: PressMention[] = [
         quote: 'Brandon Saldan has released all the tools needed to get Nocturne running on the Car Thing for anyone who is interested in trying.',
     },
     {
+        outlet: 'Yanko Design',
+        project: 'nocturne',
+        namesMe: true,
+        title: 'Nocturne’s Free App Turns Your Bricked Spotify Car Thing Into Something Better Than the Original',
+        href: 'https://www.yankodesign.com/2026/05/10/nocturnes-free-app-turns-your-bricked-spotify-car-thing-into-something-better-than-the-original/',
+        author: 'Sarang Sheth',
+        date: '2026-05-10',
+        quote: 'Nocturne picked up where Spotify dropped off.',
+    },
+    {
         outlet: 'QSR Magazine',
         project: 'invii',
         namesMe: true,
