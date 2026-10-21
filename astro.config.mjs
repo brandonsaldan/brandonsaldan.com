@@ -7,9 +7,10 @@ import vercel from '@astrojs/vercel';
 // https://astro.build/config
 export default defineConfig({
     site: 'https://brandonsaldan.com',
+    trailingSlash: 'always',
     adapter: vercel(),
     redirects: {
-        '/projects/codex': '/projects/twofold'
+        '/projects/codex/': '/projects/twofold/'
     },
     integrations: [
         mdx(),

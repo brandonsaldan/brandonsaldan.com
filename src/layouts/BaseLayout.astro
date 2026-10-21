@@ -43,7 +43,7 @@ const { showHeader = true, homeLayout = false, ...head } = Astro.props;
         </script>
         <ClientRouter />
     </head>
-    <body class:list={['bg-main text-main', { 'overflow-x-clip': Astro.url.pathname === '/travel' }]}>
+    <body class:list={['bg-main text-main', { 'overflow-x-clip': Astro.url.pathname.replace(/\/$/, '') === '/travel' }]}>
         <div class="relative flex min-h-screen flex-col px-4 md:px-8">
             <div class="absolute right-4 top-4 z-10 md:right-8 md:top-8">
                 <ThemeToggle />
@@ -53,7 +53,7 @@ const { showHeader = true, homeLayout = false, ...head } = Astro.props;
                     <div class="home-intro">
                         <div class="home-mobile-nav"><Nav /></div>
                         <div class="home-desktop-nav"><HomeNav /></div>
-                        {showHeader && <Header />}
+                        {showHeader && <Header isHome />}
                         <main class="w-full"><slot name="intro" /></main>
                     </div>
                     <div class="home-gallery"><slot name="gallery" /></div>

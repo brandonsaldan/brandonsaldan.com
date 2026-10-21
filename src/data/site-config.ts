@@ -70,40 +70,40 @@ const siteConfig: SiteConfig = {
     },
     {
       text: "Projects",
-      href: "/projects",
+      href: "/projects/",
       section: 'work',
     },
     {
       text: "Research",
-      href: "/research",
+      href: "/research/",
       section: 'work',
     },
     {
       text: "Blog",
-      href: "/blog",
+      href: "/blog/",
       section: 'work',
     },
     {
       text: "Press",
-      href: "/press",
+      href: "/press/",
       section: 'work',
       showOnHome: false,
     },
     {
       text: "Grants",
-      href: "/grants",
+      href: "/grants/",
       section: 'work',
       showOnHome: false,
     },
     {
       text: "Travel",
-      href: "/travel",
+      href: "/travel/",
       section: 'personal',
       showOnHome: false,
     },
     {
       text: "Listening",
-      href: "/listening",
+      href: "/listening/",
       section: 'personal',
       showOnHome: false,
     },
@@ -111,11 +111,11 @@ const siteConfig: SiteConfig = {
   footerNavLinks: [
     {
       text: "Contact",
-      href: "/contact",
+      href: "/contact/",
     },
     {
       text: "Résumé",
-      href: "/resume",
+      href: "/resume/",
     },
   ],
   socialLinks: [
@@ -134,7 +134,7 @@ const siteConfig: SiteConfig = {
     },
     {
       text: "Twitter",
-      href: "https://twitter.com/brandonsaldan",
+      href: "https://x.com/brandonsaldan",
     },
     {
       text: "Instagram",
@@ -146,7 +146,7 @@ const siteConfig: SiteConfig = {
     actions: [
       {
         text: "Get in Touch",
-        href: "/contact",
+        href: "/contact/",
       },
     ],
   },

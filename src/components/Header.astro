@@ -1,5 +1,8 @@
 ---
 import siteConfig from '../data/site-config';
+
+const { isHome = false } = Astro.props;
+const Name = isHome ? 'h1' : 'div';
 ---
 
 <header class="w-full max-w-3xl mx-auto mb-12 sm:mb-6">
@@ -14,9 +17,11 @@ import siteConfig from '../data/site-config';
             )
         }
         <div>
-            <a class="font-serif text-2xl leading-tight font-medium text-theme-foreground sm:text-4xl" href="/">
-                {siteConfig.title}
-            </a>
+            <Name class="m-0 text-base font-normal leading-tight">
+                <a class="font-serif text-2xl leading-tight font-medium text-theme-foreground sm:text-4xl" href="/">
+                    {siteConfig.title}
+                </a>
+            </Name>
             {siteConfig.subtitle && <p class="text-sm leading-tight mt-1">{siteConfig.subtitle}</p>}
         </div>
     </div>
