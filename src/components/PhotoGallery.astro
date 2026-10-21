@@ -241,7 +241,12 @@ const imageData = [
 
     .gallery-scroll-track.scroll-linked {
         animation: gallery-scroll auto linear both;
-        animation-timeline: scroll(root block);
+    }
+
+    @supports (animation-timeline: scroll(root block)) {
+        .gallery-scroll-track.scroll-linked {
+            animation-timeline: scroll(root block);
+        }
     }
 
     @keyframes gallery-scroll {
