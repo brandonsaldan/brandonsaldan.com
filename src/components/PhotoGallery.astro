@@ -72,7 +72,7 @@ const imageData = [
                         <span class="polaroid-face polaroid-back absolute inset-0 flex h-full flex-col justify-between bg-[#fffdf8] p-5 dark:bg-[#242424] sm:p-7">
                             <span class="h-5" aria-hidden="true"></span>
                             <span>
-                                <span class="polaroid-imprint font-biro block text-2xl leading-tight sm:text-3xl">{image.caption}</span>
+                                <span class="polaroid-imprint block text-2xl leading-tight sm:text-3xl">{image.caption}</span>
                             </span>
                             <span class="font-serif text-xs italic text-zinc-500 dark:text-neutral-400">from the personal archive</span>
                         </span>
@@ -200,6 +200,8 @@ const imageData = [
     }
 
     .polaroid-imprint {
+        font-family: 'Segoe Print', 'Bradley Hand', cursive;
+        font-weight: 400;
         color: transparent;
         background: linear-gradient(
             165deg,
@@ -212,6 +214,10 @@ const imageData = [
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         -webkit-text-stroke: 0.18px rgb(54 40 28 / 0.34);
+    }
+
+    .handwriting .polaroid-imprint {
+        font-family: 'Biro Script Plus', 'Segoe Print', 'Bradley Hand', cursive;
     }
 
     :global(.dark) .polaroid-imprint {
@@ -258,6 +264,12 @@ const imageData = [
         const track = document.getElementById('gallery-track');
         const scrollTrack = document.getElementById('gallery-scroll-track');
         if (!gallery || !track || !scrollTrack) return;
+
+        const loadHandwriting = () => gallery.classList.add('handwriting');
+        gallery.addEventListener('pointerenter', loadHandwriting, { once: true });
+        gallery.addEventListener('focusin', loadHandwriting, { once: true });
+        if (document.readyState === 'complete') window.setTimeout(loadHandwriting, 2000);
+        else window.addEventListener('load', () => window.setTimeout(loadHandwriting, 2000), { once: true });
 
         if (!track.dataset.looped) {
             const originals = Array.from(track.children);
