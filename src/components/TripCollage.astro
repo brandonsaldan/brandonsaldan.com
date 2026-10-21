@@ -1,5 +1,10 @@
 ---
-type Slide = { label: string; image: string | null; caption: string; alt?: string };
+import { Image } from 'astro:assets';
+
+const photos = import.meta.glob<{ default: ImageMetadata }>('../assets/travel/*.webp', { eager: true });
+const photo = (path: string) => photos[`../assets/travel/${path.split('/').pop()}`].default;
+
+type Slide ={ label: string; image: string | null; caption: string; alt?: string };
 type Trip = { name: string; scene: string; slides?: Slide[] };
 const { trip } = Astro.props as { trip: Trip };
 const slides = trip.slides ?? [];
@@ -9,7 +14,7 @@ const slides = trip.slides ?? [];
   {trip.scene === 'notebook' && (
     <div class="collage-stage nf-stage">
       {slides.map((slide, index) => <figure class:list={['nf-photo', `nf-photo--${index + 1}`, 'photo-object']}>
-        {slide.image ? <img src={slide.image} alt={slide.alt ?? slide.caption} loading="lazy" decoding="async" /> : <span class="photo-placeholder">{slide.caption}</span>}
+        {slide.image ? <Image src={photo(slide.image)} alt={slide.alt ?? slide.caption} widths={[320, 640]} sizes="(min-width: 640px) 18rem, 50vw" loading="lazy" decoding="async" /> : <span class="photo-placeholder">{slide.caption}</span>}
         <figcaption>{slide.caption}</figcaption>
       </figure>)}
     </div>
@@ -18,7 +23,7 @@ const slides = trip.slides ?? [];
   {trip.scene === 'foldout' && (
     <div class="collage-stage eu-stage">
       {slides.filter((slide) => slide.image).map((slide, index) => <figure class:list={['eu-photo', `eu-photo--${index + 1}`, 'photo-object']}>
-        <img src={slide.image!} alt={slide.caption} loading="lazy" decoding="async" /><figcaption>{slide.caption}</figcaption>
+        <Image src={photo(slide.image!)} alt={slide.caption} widths={[320, 640]} sizes="(min-width: 640px) 18rem, 50vw" loading="lazy" decoding="async" /><figcaption>{slide.caption}</figcaption>
       </figure>)}
     </div>
   )}
@@ -26,7 +31,7 @@ const slides = trip.slides ?? [];
   {trip.scene === 'tampa-scrapbook' && (
     <div class="collage-stage tampa-stage">
       {slides.map((slide, index) => <figure class:list={['tampa-photo', `tampa-photo--${index + 1}`, 'photo-object']}>
-        {slide.image ? <img src={slide.image} alt={slide.alt ?? slide.caption} loading="lazy" decoding="async" /> : <span class="photo-placeholder">{slide.caption}</span>}
+        {slide.image ? <Image src={photo(slide.image)} alt={slide.alt ?? slide.caption} widths={[320, 640]} sizes="(min-width: 640px) 18rem, 50vw" loading="lazy" decoding="async" /> : <span class="photo-placeholder">{slide.caption}</span>}
         <figcaption>{slide.caption}</figcaption>
       </figure>)}
     </div>
@@ -35,7 +40,7 @@ const slides = trip.slides ?? [];
   {trip.scene === 'ship-log' && (
     <div class="collage-stage bahamas-stage">
       {slides.map((slide, index) => <figure class:list={['bahamas-photo', `bahamas-photo--${index + 1}`, 'photo-object']}>
-        {slide.image ? <img src={slide.image} alt={slide.alt ?? slide.caption} loading="lazy" decoding="async" /> : <span class="photo-placeholder">{slide.caption}</span>}<figcaption>{slide.caption}</figcaption>
+        {slide.image ? <Image src={photo(slide.image)} alt={slide.alt ?? slide.caption} widths={[320, 640]} sizes="(min-width: 640px) 18rem, 50vw" loading="lazy" decoding="async" /> : <span class="photo-placeholder">{slide.caption}</span>}<figcaption>{slide.caption}</figcaption>
       </figure>)}
     </div>
   )}
@@ -43,7 +48,7 @@ const slides = trip.slides ?? [];
   {trip.scene === 'scorecard' && (
     <div class="collage-stage catskills-stage">
       {slides.map((slide, index) => <figure class:list={['catskills-photo', `catskills-photo--${index + 1}`, 'photo-object']}>
-        {slide.image ? <img src={slide.image} alt={slide.alt ?? slide.caption} loading="lazy" decoding="async" /> : <span class="photo-placeholder">{slide.caption}</span>}<figcaption>{slide.caption}</figcaption>
+        {slide.image ? <Image src={photo(slide.image)} alt={slide.alt ?? slide.caption} widths={[320, 640]} sizes="(min-width: 640px) 18rem, 50vw" loading="lazy" decoding="async" /> : <span class="photo-placeholder">{slide.caption}</span>}<figcaption>{slide.caption}</figcaption>
       </figure>)}
     </div>
   )}
@@ -51,7 +56,7 @@ const slides = trip.slides ?? [];
   {trip.scene === 'port-pass' && (
     <div class="collage-stage caribbean-stage">
       {slides.map((slide, index) => <figure class:list={['caribbean-photo', `caribbean-photo--${index + 1}`, 'photo-object']}>
-        {slide.image ? <img src={slide.image} alt={slide.alt ?? slide.caption} loading="lazy" decoding="async" /> : <span class="photo-placeholder">{slide.caption}</span>}<figcaption>{slide.caption}</figcaption>
+        {slide.image ? <Image src={photo(slide.image)} alt={slide.alt ?? slide.caption} widths={[320, 640]} sizes="(min-width: 640px) 18rem, 50vw" loading="lazy" decoding="async" /> : <span class="photo-placeholder">{slide.caption}</span>}<figcaption>{slide.caption}</figcaption>
       </figure>)}
     </div>
   )}
