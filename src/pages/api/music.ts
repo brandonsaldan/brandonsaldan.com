@@ -41,7 +41,6 @@ function coverArt(images: LastFmImage[] | undefined): string | null {
       return url.toString();
     }
   } catch {
-    // unavailable
   }
   return null;
 }

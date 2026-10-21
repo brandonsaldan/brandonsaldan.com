@@ -26,7 +26,7 @@
 
     async function load() {
       try {
-        const response = await fetch('/api/music.json?period=1month');
+        const response = await fetch('/api/music/?period=1month');
         if (!response.ok) return;
         const data = await response.json() as MusicResponse;
         const track = data.recentTracks[0];

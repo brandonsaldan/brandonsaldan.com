@@ -375,7 +375,7 @@ import { ogCard } from '../utils/image-utils';
     async function load() {
       const thisRequest = ++requestId;
       try {
-        const response = await fetch(`/api/music.json?period=${period}`);
+        const response = await fetch(`/api/music/?period=${period}`);
         if (!response.ok) throw new Error('Music unavailable');
         const data = await response.json() as MusicResponse;
         if (thisRequest !== requestId || !page.isConnected) return;

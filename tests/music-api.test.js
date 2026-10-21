@@ -1,5 +1,5 @@
 import { afterEach, expect, test } from 'bun:test';
-import { GET } from '../src/pages/api/music.json.ts';
+import { GET } from '../src/pages/api/music.ts';
 
 const originalFetch = globalThis.fetch;
 const originalKey = process.env.LASTFM_API_KEY;
@@ -26,7 +26,7 @@ test('normalizes listening data and artwork without exposing provider links', as
     return Response.json(data);
   };
 
-  const response = await GET({ url: new URL('https://brandonsaldan.com/api/music.json?period=7day') });
+  const response = await GET({ url: new URL('https://brandonsaldan.com/api/music/?period=7day') });
   expect(response.status).toBe(200);
   const data = await response.json();
   expect(data.period).toBe('7day');
@@ -45,7 +45,7 @@ test('normalizes listening data and artwork without exposing provider links', as
 
 test('returns a clear unavailable response before an API key is configured', async () => {
   delete process.env.LASTFM_API_KEY;
-  const response = await GET({ url: new URL('https://brandonsaldan.com/api/music.json') });
+  const response = await GET({ url: new URL('https://brandonsaldan.com/api/music/') });
   expect(response.status).toBe(503);
   expect(await response.json()).toEqual({ error: 'not_configured' });
 });
