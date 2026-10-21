@@ -15,7 +15,7 @@ const sortByDateDesc = <T extends { data: { publishDate: Date } }>(a: T, b: T) =
     b.data.publishDate.getTime() - a.data.publishDate.getTime();
 const folderEntries = {
     '/projects': projects.sort(sortByDateDesc).map((entry) => ({
-        text: entry.data.title.split(' - ')[0],
+        text: entry.data.title.split(': ')[0],
         href: `/projects/${entry.id}/`,
     })),
     '/research': research.sort(sortByDateDesc).map((entry) => ({

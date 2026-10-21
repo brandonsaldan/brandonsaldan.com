@@ -41,7 +41,7 @@ const schema = [
     ...projects.map(({ id, data }) => ({
         '@type': 'SoftwareSourceCode',
         ...projectRef(id),
-        name: data.title.split(' - ')[0],
+        name: data.title.split(': ')[0],
         url: data.website ?? absoluteURL(`/projects/${id}/`),
         author: personRef
     })),

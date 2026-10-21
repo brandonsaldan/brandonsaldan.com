@@ -19,9 +19,9 @@ const { project } = Astro.props;
 const { title: rawTitle, description, publishDate, status, focus, repository, website, seo } = project.data;
 const { Content } = await render(project);
 const readingTime = Math.max(1, Math.ceil((project.body || '').trim().split(/\s+/).filter(Boolean).length / 200));
-const separatorIndex = rawTitle.indexOf(' - ');
+const separatorIndex = rawTitle.indexOf(': ');
 const title = separatorIndex === -1 ? rawTitle : rawTitle.slice(0, separatorIndex);
-const subtitle = separatorIndex === -1 ? undefined : rawTitle.slice(separatorIndex + 3);
+const subtitle = separatorIndex === -1 ? undefined : rawTitle.slice(separatorIndex + 2);
 const pageURL = new URL(`/projects/${project.id}/`, Astro.site).href;
 const social = (await socialImage(seo?.image)) ?? ogCard(`projects/${project.id}`, title);
 const schema = [

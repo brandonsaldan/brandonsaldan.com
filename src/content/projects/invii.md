@@ -1,5 +1,5 @@
 ---
-title: "Invii - Restaurant Management Platform"
+title: "Invii: Restaurant Management Platform"
 description: "A comprehensive suite of tools designed to modernize restaurant operations through innovative technology solutions."
 publishDate: "2021-02-26"
 image:

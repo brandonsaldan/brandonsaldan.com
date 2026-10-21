@@ -51,8 +51,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
         ...Object.entries(pages).map(([slug, title]): [string, Card] => [slug, { label: 'brandonsaldan.com', title, italic: true }]),
         ...blog.map((post): [string, Card] => [`blog/${post.id}`, { label: 'Blog Post', title: post.data.title, subtitle: post.data.excerpt }]),
         ...projects.map((project): [string, Card] => {
-            const [title, ...rest] = project.data.title.split(' - ');
-            return [`projects/${project.id}`, { label: 'Project', title, subtitle: rest.join(' - ') || project.data.description }];
+            const [title, ...rest] = project.data.title.split(': ');
+            return [`projects/${project.id}`, { label: 'Project', title, subtitle: rest.join(': ') || project.data.description }];
         }),
         ...research.map((paper): [string, Card] => [`research/${paper.id}`, { label: paper.data.paperType, title: paper.data.shortTitle, subtitle: paper.data.subtitle }])
     ];

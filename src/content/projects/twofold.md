@@ -1,5 +1,5 @@
 ---
-title: "Twofold - In-Browser Genetic Data Explorer"
+title: "Twofold: In-Browser Genetic Data Explorer"
 description: "A free, open-source tool that reads raw DNA test data against a complete snapshot of SNPedia, entirely in the browser."
 publishDate: "2023-05-22"
 image:
