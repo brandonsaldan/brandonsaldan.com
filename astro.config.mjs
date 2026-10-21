@@ -1,9 +1,33 @@
+import { readdirSync, readFileSync } from 'node:fs';
 import { readFile, writeFile } from 'node:fs/promises';
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
 import vercel from '@astrojs/vercel';
+
+const frontmatterDate = (source, key) => source.match(new RegExp(`^${key}:\\s*["']?([^"'\\n]+)`, 'm'))?.[1];
+
+const contentDates = () => {
+    const dates = new Map();
+    for (const collection of ['blog', 'research']) {
+        const directory = new URL(`./src/content/${collection}/`, import.meta.url);
+        const entries = readdirSync(directory)
+            .filter((file) => /\.mdx?$/.test(file))
+            .map((file) => {
+                const source = readFileSync(new URL(file, directory), 'utf8');
+                const date = frontmatterDate(source, 'updatedDate') ?? frontmatterDate(source, 'publishDate');
+                return [`/${collection}/${file.replace(/\.mdx?$/, '')}/`, new Date(date)];
+            })
+            .filter(([, date]) => !Number.isNaN(date.valueOf()));
+        entries.forEach(([path, date]) => dates.set(path, date));
+        dates.set(`/${collection}/`, new Date(Math.max(...entries.map(([, date]) => date.valueOf()))));
+    }
+    dates.set('/', new Date(Math.max(dates.get('/blog/').valueOf(), dates.get('/research/').valueOf())));
+    return dates;
+};
+
+const lastModified = contentDates();
 
 const vercelRoutes = () => ({
     name: 'vercel-routes',
@@ -54,7 +78,12 @@ export default defineConfig({
     },
     integrations: [
         mdx(),
-        sitemap(),
+        sitemap({
+            serialize(item) {
+                const date = lastModified.get(new URL(item.url).pathname);
+                return date ? { ...item, lastmod: date.toISOString() } : item;
+            }
+        }),
         tailwind({
             applyBaseStyles: false
         }),
