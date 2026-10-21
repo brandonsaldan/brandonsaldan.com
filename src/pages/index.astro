@@ -22,7 +22,7 @@ const research = (await getCollection('research')).sort(sortItemsByDateDesc);
 const featuredResearch = research.filter(({ data }) => data.isFeatured);
 ---
 
-<BaseLayout description={siteConfig.description} image={siteConfig.image} page={{ '@type': 'ProfilePage', mainEntity: personRef, about: personRef }} homeLayout>
+<BaseLayout fullTitle={`${siteConfig.title} | Technology, Data, and Business Strategy`} description={siteConfig.description} image={siteConfig.image} page={{ '@type': 'ProfilePage', mainEntity: personRef, about: personRef }} homeLayout>
     <Hero slot="intro" />
     <PhotoGallery slot="gallery" />
     {
@@ -30,7 +30,7 @@ const featuredResearch = research.filter(({ data }) => data.isFeatured);
             <div class="mb-16 sm:mb-24">
                 <div class="flex items-baseline justify-between mb-8 sm:mb-12">
                     <h2 class="text-3xl font-serif italic sm:text-2xl">Selected Projects</h2>
-                    <span class="text-base font-serif italic text-neutral-500 dark:text-neutral-500">
+                    <span class="text-base font-serif italic text-neutral-600 dark:text-neutral-400">
                         {featuredProjects.length} {featuredProjects.length === 1 ? 'project' : 'projects'}
                     </span>
                 </div>
@@ -52,7 +52,7 @@ const featuredResearch = research.filter(({ data }) => data.isFeatured);
             <div class="mb-16 sm:mb-24">
                 <div class="flex items-baseline justify-between mb-8 sm:mb-12">
                     <h2 class="text-3xl font-serif italic sm:text-2xl">Recent Research</h2>
-                    <span class="text-base font-serif italic text-neutral-500 dark:text-neutral-500">
+                    <span class="text-base font-serif italic text-neutral-600 dark:text-neutral-400">
                         {featuredResearch.length} {featuredResearch.length === 1 ? 'paper' : 'papers'}
                     </span>
                 </div>
@@ -74,7 +74,7 @@ const featuredResearch = research.filter(({ data }) => data.isFeatured);
             <div class="mb-16 sm:mb-24">
                 <div class="flex items-baseline justify-between mb-8 sm:mb-12">
                     <h2 class="text-3xl font-serif italic sm:text-2xl">Recent Writing</h2>
-                    <span class="text-base font-serif italic text-neutral-500 dark:text-neutral-500">
+                    <span class="text-base font-serif italic text-neutral-600 dark:text-neutral-400">
                         {featuredPosts.length} {featuredPosts.length === 1 ? 'post' : 'posts'}
                     </span>
                 </div>

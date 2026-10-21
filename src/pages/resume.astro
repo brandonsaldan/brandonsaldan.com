@@ -89,7 +89,7 @@ const papers = await Promise.all(research.map(async (paper) => {
             <span class="resume-lenses-label">Focus on</span>
             <ul>
                 <li><a href="/resume/" data-resume-lens="" aria-current="true">Everything</a></li>
-                {lenses.map((lens) => <li><a href={`/resume?for=${lens.id}`} data-resume-lens={lens.id}>{lens.label}</a></li>)}
+                {lenses.map((lens) => <li><a href={`/resume/?for=${lens.id}`} data-resume-lens={lens.id}>{lens.label}</a></li>)}
             </ul>
         </nav>
         <div class="resume-actions">
@@ -131,7 +131,7 @@ const papers = await Promise.all(research.map(async (paper) => {
                                         ))}
                                     </ul>
                                 )}
-                                {entry.href && <a class="resume-inline-link resume-more" href={entry.href}>Read more</a>}
+                                {entry.href && <a class="resume-inline-link resume-more" href={entry.href}>Read more<span class="sr-only"> about {entry.organization}</span></a>}
                             </div>
                         </details>
                     ))}
@@ -205,7 +205,7 @@ const papers = await Promise.all(research.map(async (paper) => {
                                         ))}
                                     </ul>
                                 )}
-                                {entry.href && <a class="resume-inline-link resume-more" href={entry.href}>Read more</a>}
+                                {entry.href && <a class="resume-inline-link resume-more" href={entry.href}>Read more<span class="sr-only"> about {entry.organization}</span></a>}
                             </div>
                         </details>
                     ))}

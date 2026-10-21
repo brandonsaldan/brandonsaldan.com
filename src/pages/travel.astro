@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import puntaCanaFlight from '../assets/travel/punta-cana-flight.webp';
 import { ogCard } from '../utils/image-utils';
 import TripCollage from '../components/TripCollage.astro';
 import travelData from '../data/travel-data';
@@ -186,10 +188,10 @@ const journeyGroups = Array.from(
                   <div class="punta-scene-stage">
                     <div class="punta-scene-objects">
                       <div class="punta-passport" aria-hidden="true">
-                        <img class="punta-passport-cover-image" src="/photos/punta-cana-passport.webp" alt="" decoding="async" />
+                        <img class="punta-passport-cover-image" src="/photos/punta-cana-passport.webp" alt="" width="720" height="1021" decoding="async" fetchpriority="high" />
                       </div>
                       <figure class="punta-flight-photo">
-                        <img src="/photos/punta-cana-flight.webp" alt="Brandon as a child on his first flight to Punta Cana" decoding="async" fetchpriority="high" />
+                        <Image src={puntaCanaFlight} alt="Brandon as a child on his first flight to Punta Cana" widths={[320, 640]} sizes="(min-width: 640px) 18.3rem, 60vw" decoding="async" fetchpriority="high" />
                         <figcaption>first flight</figcaption>
                       </figure>
                       <div class="punta-ticket">
