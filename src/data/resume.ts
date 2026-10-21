@@ -31,7 +31,7 @@ export const experience: ResumeEntry[] = [
     {
         title: 'Apple Support College Program Advisor',
         organization: 'Apple',
-        location: 'Charlotte, NC',
+        location: 'Chapel Hill, NC',
         start: '2025-05',
         dates: 'May 2025 – Present',
         lenses: ['engineering', 'business'],
@@ -51,10 +51,10 @@ export const experience: ResumeEntry[] = [
         href: '/projects/invii/',
         lenses: ['engineering', 'leadership'],
         notes: [
-            { after: 'Co-founded an early-stage startup', text: 'Invii was a restaurant management platform: one dashboard for analytics, inventory, staff scheduling, and finances, plus digital menus, loyalty programs, and customer feedback.' },
+            { after: 'at an early-stage startup', text: 'Invii was a restaurant management platform: one dashboard for analytics, inventory, staff scheduling, and finances, plus digital menus, loyalty programs, and customer feedback.' },
         ],
         points: [
-            'Co-founded an early-stage startup and owned all frontend development, taking products from first prototype through production.',
+            'Owned all frontend development at an early-stage startup, taking products from first prototype through production.',
             'Developed and maintained a suite of internal dashboards and consumer-facing web applications using Vue.js, Nuxt, and TailwindCSS, focused on responsive, accessible interfaces across the product line.',
             'Collaborated closely with a small cross-functional team spanning design and backend to deliver high-quality, visually appealing, and performant web applications within project timelines.',
             'Built and iterated on UI from design handoff to production, prioritizing performance and accessibility (WCAG/ARIA) across devices and browsers.',

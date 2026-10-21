@@ -17,13 +17,13 @@ seo:
 
 ![Invii platform interface](../../assets/projects/invii/invii-1.png)
 
-Invii was a restaurant management platform built to explore how software could modernize day-to-day operations. As founder and CEO, I led the development of a suite of tools intended to streamline internal work, improve customer engagement, and create a more connected payment and reporting experience for restaurants.
+Invii was a restaurant management platform built to explore how software could modernize day-to-day operations. As frontend lead from February 2021 to October 2023, I owned the interfaces for a suite of tools intended to streamline internal work, improve customer engagement, and create a more connected payment and reporting experience for restaurants.
 
-## Leadership & Responsibilities
+## Role & Responsibilities
 
-I led product development across the Invii landing page, internal dashboard, and customer-facing web application. I also designed and implemented the brand identity, coordinated the product direction, and connected the software work to the needs of the business.
+I led frontend development across the Invii landing page, internal dashboard, and customer-facing web application, taking each from first prototype through production. I also designed and implemented the brand identity and shaped the interfaces around the needs of the business.
 
-The company required the same attention to operations as it did to product development. I managed day-to-day company activity, legal and regulatory requirements, financial planning, fundraising initiatives, and early customer acquisition. This combination of product and operational responsibility shaped the platform around the real constraints of restaurant businesses.
+I worked closely with a small cross-functional team spanning design and backend, building responsive, accessible interfaces that held up across devices and browsers. Keeping the frontend close to how restaurants actually worked shaped the platform around the real constraints of the business.
 
 ## Platform Design
 
@@ -39,7 +39,7 @@ The frontend used React.js and Next.js with TailwindCSS for responsive interface
 
 Invii produced a deployed full-stack restaurant management platform, a complete brand and marketing direction, and a pilot program agreement with a Philadelphia restaurant. The project also established a scalable technical foundation and created a clearer understanding of the operational needs of the restaurant industry.
 
-The core team included Brandon Saldan as CEO, frontend developer, and operations lead, and Mustafa Mohamed as CTO, backend developer, and technical architect. Additional contributors supported development and design as the platform grew.
+The core team included Brandon Saldan as frontend lead and Mustafa Mohamed as CTO, backend developer, and technical architect. Additional contributors supported development and design as the platform grew.
 
 ## Outcome & Status
 
