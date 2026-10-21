@@ -27,7 +27,7 @@ const schema = [
         '@id': `${pageURL}#article`,
         headline: title,
         author: personRef,
-        datePublished: publishDate.toISOString().slice(0, 10),
+        datePublished: publishDate.toISOString(),
         description: excerpt,
         url: pageURL,
         mainEntityOfPage: { '@id': `${pageURL}#webpage` },
