@@ -40,7 +40,7 @@ export const person: SchemaNode = {
     affiliation: schools(false),
     alumniOf: schools(true),
     knowsAbout: siteConfig.topics,
-    sameAs: siteConfig.socialLinks?.map(({ href }) => href)
+    sameAs: [...(siteConfig.socialLinks ?? []).map(({ href }) => href), ...(siteConfig.profiles ?? [])]
 };
 
 export const breadcrumbs = (pageURL: string, trail: [name: string, path: string][]): SchemaNode => ({

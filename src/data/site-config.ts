@@ -38,6 +38,7 @@ export type SiteConfig = {
   headerNavLinks?: HeaderLink[];
   footerNavLinks?: Link[];
   socialLinks?: SocialLink[];
+  profiles?: string[];
   hero?: Hero;
   postsPerPage?: number;
   projectsPerPage?: number;
@@ -144,6 +145,13 @@ const siteConfig: SiteConfig = {
       text: "Instagram",
       href: "https://instagram.com/brandonsaldan",
     },
+  ],
+  profiles: [
+    "https://scholar.google.com/citations?user=uRjKpkYAAAAJ",
+    "https://profile.hcommons.org/members/brandonsaldan/",
+    "https://www.researchgate.net/profile/Brandon-Saldan",
+    "https://uncc.academia.edu/BrandonSaldan",
+    "https://www.crunchbase.com/person/brandon-saldan",
   ],
   hero: {
     text: "I work at the intersection of technology, data, and business strategy, helping teams navigate complex operational and organizational problems.\n\nI’m completing dual degrees in Management Information Systems and Business Analytics with minors in Political Science and American Studies at the University of North Carolina at Charlotte, and work in technical support at Apple. My software engineering background helps me evaluate technology, lead technical work, build products that connect engineering with business strategy, and explain technical decisions plainly to people outside engineering.",
