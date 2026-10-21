@@ -26,7 +26,7 @@ const countriesId = 'countries-tooltip-' + Math.random().toString(36).substr(2, 
         <li class="flex justify-between items-baseline gap-3">
           <span>{state.name}</span>
           {state.visitedDate && (
-            <span class="text-xs text-neutral-500 dark:text-neutral-500 font-serif italic flex-shrink-0">
+            <span class="text-xs text-neutral-600 dark:text-neutral-400 font-serif italic flex-shrink-0">
               {state.visitedDate}
             </span>
           )}
@@ -45,13 +45,13 @@ const countriesId = 'countries-tooltip-' + Math.random().toString(36).substr(2, 
           <div class="flex justify-between items-baseline gap-3">
             <span>{country.name}</span>
             {country.visitedDate && (
-              <span class="text-xs text-neutral-500 dark:text-neutral-500 font-serif italic flex-shrink-0">
+              <span class="text-xs text-neutral-600 dark:text-neutral-400 font-serif italic flex-shrink-0">
                 {country.visitedDate}
               </span>
             )}
           </div>
           {country.notes && (
-            <span class="text-xs text-neutral-500 dark:text-neutral-500">
+            <span class="text-xs text-neutral-600 dark:text-neutral-400">
               {country.notes}
             </span>
           )}
