@@ -7,6 +7,7 @@ import '../styles/global.css';
 
 export type Props = {
     title?: string;
+    fullTitle?: string;
     description?: string;
     image?: { src: string; alt?: string; width?: number; height?: number };
     pageType?: 'website' | 'article';
@@ -16,7 +17,7 @@ export type Props = {
 };
 
 const { description = '', image = siteConfig.image, pageType = 'website', noindex = false, page, schema = [] } = Astro.props;
-const title = [Astro.props.title, siteConfig.title].filter(Boolean).join(' | ');
+const title = Astro.props.fullTitle ?? [Astro.props.title, siteConfig.title].filter(Boolean).join(' | ');
 const resolvedImage = image?.src
     ? {
           src: new URL(image.src, Astro.site).toString(),

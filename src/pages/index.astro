@@ -22,7 +22,7 @@ const research = (await getCollection('research')).sort(sortItemsByDateDesc);
 const featuredResearch = research.filter(({ data }) => data.isFeatured);
 ---
 
-<BaseLayout description={siteConfig.description} image={siteConfig.image} page={{ '@type': 'ProfilePage', mainEntity: personRef, about: personRef }} homeLayout>
+<BaseLayout fullTitle={`${siteConfig.title} | Technology, Data, and Business Strategy`} description={siteConfig.description} image={siteConfig.image} page={{ '@type': 'ProfilePage', mainEntity: personRef, about: personRef }} homeLayout>
     <Hero slot="intro" />
     <PhotoGallery slot="gallery" />
     {
