@@ -34,7 +34,7 @@ const postmarkDay = today.toLocaleDateString('en-US', { month: 'short', day: 'nu
                     </defs>
                     <circle cx="54" cy="50" r="42" />
                     <circle cx="54" cy="50" r="24" />
-                    <text><textPath href="#returned-postmark-top" startOffset="50%" text-anchor="middle">CHARLOTTE, NC</textPath></text>
+                    <text class="returned-postmark-place"><textPath href="#returned-postmark-top" startOffset="50%" text-anchor="middle">CHAPEL HILL, NC</textPath></text>
                     <text><textPath href="#returned-postmark-bottom" startOffset="50%" text-anchor="middle" data-postmark-year>{today.getFullYear()}</textPath></text>
                     <text class="returned-postmark-center" x="54" y="54.5" text-anchor="middle" data-postmark-day>{postmarkDay}</text>
                     <path d="M 104 34 q 10 -7 20 0 t 20 0 t 20 0 t 20 0 t 20 0 t 20 0" />
@@ -57,7 +57,7 @@ const postmarkDay = today.toLocaleDateString('en-US', { month: 'short', day: 'nu
 
     <div class="mt-12 flex flex-wrap items-center gap-x-6 gap-y-4 sm:mt-14">
         <Button href="/">Back to Home</Button>
-        <a class="returned-link" href="/contact">Report a broken link</a>
+        <a class="returned-link" href="/contact/">Report a broken link</a>
     </div>
 </BaseLayout>
 
@@ -188,6 +188,7 @@ const postmarkDay = today.toLocaleDateString('en-US', { month: 'short', day: 'nu
         font-weight: 600;
         letter-spacing: .14em;
     }
+    .returned-postmark .returned-postmark-place { letter-spacing: .08em; }
     .returned-postmark .returned-postmark-center { font-family: 'Newsreader Variable', serif; font-size: 12px; letter-spacing: .06em; }
     .returned-lines li {
         min-height: 2.4rem;
