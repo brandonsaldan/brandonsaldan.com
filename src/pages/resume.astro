@@ -89,7 +89,7 @@ const papers = await Promise.all(research.map(async (paper) => {
             <span class="resume-lenses-label">Focus on</span>
             <ul>
                 <li><a href="/resume/" data-resume-lens="" aria-current="true">Everything</a></li>
-                {lenses.map((lens) => <li><a href={`/resume?for=${lens.id}`} data-resume-lens={lens.id}>{lens.label}</a></li>)}
+                {lenses.map((lens) => <li><a href={`/resume/?for=${lens.id}`} data-resume-lens={lens.id}>{lens.label}</a></li>)}
             </ul>
         </nav>
         <div class="resume-actions">
