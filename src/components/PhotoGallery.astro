@@ -1,60 +1,65 @@
 ---
-const rotations = ['rotate-2', '-rotate-2', 'rotate-2', 'rotate-2', '-rotate-2'];
+import { Image } from 'astro:assets';
+
+const photos = import.meta.glob<{ default: ImageMetadata }>('../assets/gallery/*.webp', { eager: true });
+const photo = (file: string) => photos[`../assets/gallery/${file}`].default;
+
+const rotations =['rotate-2', '-rotate-2', 'rotate-2', 'rotate-2', '-rotate-2'];
 
 const imageData = [
-    { src: '/photos/gallery/image-1.webp', title: 'Tampa, FL', description: 'University of Tampa', caption: 'luh calm group shot' },
-    { src: '/photos/gallery/image-2.webp', title: 'Charlotte, NC', description: 'Freedom Park', caption: 'stargazing' },
-    { src: '/photos/gallery/image-3.webp', title: 'Saint Pete Beach, FL', description: 'Gulf of Mexico', caption: 'up on the roof' },
-    { src: '/photos/gallery/image-4.webp', title: 'Athens, NY', description: 'Sleepy Hollow Lake', caption: 'rock skipping team photo' },
-    { src: '/photos/gallery/image-5.webp', title: 'Tampa, FL', description: 'Bayshore Boulevard', caption: 'my first borg' },
-    { src: '/photos/gallery/image-6.webp', title: 'Athens, NY', description: 'Sleepy Hollow Lake', caption: 'post-rock skipping championship win' },
-    { src: '/photos/gallery/image-7.webp', title: 'Saint Petersburg, FL', description: 'Tampa Bay', caption: 'the night alistair drove an automatic for the first time' },
-    { src: '/photos/gallery/image-8.webp', title: 'Clearwater, FL', description: 'Sand Key', caption: 'worth the drive' },
-    { src: '/photos/gallery/image-9.webp', title: 'Hudson, NY', description: 'Catskill Mountains', caption: 'took the scenic route' },
-    { src: '/photos/gallery/image-10.webp', title: 'Chapel Hill, NC', description: 'UNC Chapel Hill', caption: 'vercel swag box' },
-    { src: '/photos/gallery/image-11.webp', title: 'Saint Petersburg, FL', description: 'Spa Beach Park', caption: 'absolutely height mogged' },
-    { src: '/photos/gallery/image-12.webp', title: 'Clearwater, FL', description: 'Sand Key', caption: 'working on whatever' },
-    { src: '/photos/gallery/image-13.webp', title: 'Saint Petersburg, FL', description: 'Tampa Bay', caption: 'most insane sunset' },
-    { src: '/photos/gallery/image-14.webp', title: 'Tampa, FL', description: 'The Orpheum', caption: 'backstage with glaive + height mogged again' },
-    { src: '/photos/gallery/image-15.webp', title: 'Wilmington, DE', description: 'Wilmington Airport', caption: 'board cost more than the ticket' },
-    { src: '/photos/gallery/image-16.webp', title: 'Atlantic Ocean', description: 'Northeast Providence Channel', caption: 'github commits made from the middle of the ocean' },
-    { src: '/photos/gallery/image-17.webp', title: 'Pinellas Park, FL', description: 'Tampa Bay Grand Prix', caption: 'gave me wings' },
-    { src: '/photos/gallery/image-18.webp', title: 'Tampa, FL', description: 'University of Tampa', caption: 'i dont even go to this university' },
-    { src: '/photos/gallery/image-19.webp', title: 'Myrtle Beach, SC', description: 'Singleton Swash Beach', caption: 'another sunset' },
-    { src: '/photos/gallery/image-20.webp', title: 'Kraków, Poland', description: 'Wawel Cathedral', caption: 'the official group photo' },
-    { src: '/photos/gallery/image-21.webp', title: 'New York City, NY', description: 'LaGuardia', caption: 'crazy view' },
-    { src: '/photos/gallery/image-22.webp', title: 'Prague, Czechia', description: 'Church of Saint Nicholas', caption: 'i miss prague' },
-    { src: '/photos/gallery/image-23.webp', title: 'Carrboro, NC', description: 'Cat\'s Cradle', caption: 'glaive again' },
-    { src: '/photos/gallery/image-24.webp', title: 'Washington, DC', description: 'Rock Creek Park', caption: 'sun was in my eyes' },
-    { src: '/photos/gallery/image-25.webp', title: 'Budapest, Hungary', description: 'St. Stephen\'s Basilica', caption: 'looked up for once' },
-    { src: '/photos/gallery/image-26.webp', title: 'Philadelphia, PA', description: 'Theatre of Living Arts', caption: 'after brakence' },
-    { src: '/photos/gallery/image-27.webp', title: 'Philadelphia, PA', description: 'The Mann Center', caption: 'yellowcard' },
-    { src: '/photos/gallery/image-28.webp', title: 'Hudson, NY', description: 'Catskill Mountains', caption: 'ny in the fall' },
-    { src: '/photos/gallery/image-29.webp', title: 'New York City, NY', description: 'World Trade Center', caption: 'there is someone standing on the roof' },
+    { src: 'image-1.webp', title: 'Tampa, FL', description: 'University of Tampa', caption: 'luh calm group shot' },
+    { src: 'image-2.webp', title: 'Charlotte, NC', description: 'Freedom Park', caption: 'stargazing' },
+    { src: 'image-3.webp', title: 'Saint Pete Beach, FL', description: 'Gulf of Mexico', caption: 'up on the roof' },
+    { src: 'image-4.webp', title: 'Athens, NY', description: 'Sleepy Hollow Lake', caption: 'rock skipping team photo' },
+    { src: 'image-5.webp', title: 'Tampa, FL', description: 'Bayshore Boulevard', caption: 'my first borg' },
+    { src: 'image-6.webp', title: 'Athens, NY', description: 'Sleepy Hollow Lake', caption: 'post-rock skipping championship win' },
+    { src: 'image-7.webp', title: 'Saint Petersburg, FL', description: 'Tampa Bay', caption: 'the night alistair drove an automatic for the first time' },
+    { src: 'image-8.webp', title: 'Clearwater, FL', description: 'Sand Key', caption: 'worth the drive' },
+    { src: 'image-9.webp', title: 'Hudson, NY', description: 'Catskill Mountains', caption: 'took the scenic route' },
+    { src: 'image-10.webp', title: 'Chapel Hill, NC', description: 'UNC Chapel Hill', caption: 'vercel swag box' },
+    { src: 'image-11.webp', title: 'Saint Petersburg, FL', description: 'Spa Beach Park', caption: 'absolutely height mogged' },
+    { src: 'image-12.webp', title: 'Clearwater, FL', description: 'Sand Key', caption: 'working on whatever' },
+    { src: 'image-13.webp', title: 'Saint Petersburg, FL', description: 'Tampa Bay', caption: 'most insane sunset' },
+    { src: 'image-14.webp', title: 'Tampa, FL', description: 'The Orpheum', caption: 'backstage with glaive + height mogged again' },
+    { src: 'image-15.webp', title: 'Wilmington, DE', description: 'Wilmington Airport', caption: 'board cost more than the ticket' },
+    { src: 'image-16.webp', title: 'Atlantic Ocean', description: 'Northeast Providence Channel', caption: 'github commits made from the middle of the ocean' },
+    { src: 'image-17.webp', title: 'Pinellas Park, FL', description: 'Tampa Bay Grand Prix', caption: 'gave me wings' },
+    { src: 'image-18.webp', title: 'Tampa, FL', description: 'University of Tampa', caption: 'i dont even go to this university' },
+    { src: 'image-19.webp', title: 'Myrtle Beach, SC', description: 'Singleton Swash Beach', caption: 'another sunset' },
+    { src: 'image-20.webp', title: 'Kraków, Poland', description: 'Wawel Cathedral', caption: 'the official group photo' },
+    { src: 'image-21.webp', title: 'New York City, NY', description: 'LaGuardia', caption: 'crazy view' },
+    { src: 'image-22.webp', title: 'Prague, Czechia', description: 'Church of Saint Nicholas', caption: 'i miss prague' },
+    { src: 'image-23.webp', title: 'Carrboro, NC', description: 'Cat\'s Cradle', caption: 'glaive again' },
+    { src: 'image-24.webp', title: 'Washington, DC', description: 'Rock Creek Park', caption: 'sun was in my eyes' },
+    { src: 'image-25.webp', title: 'Budapest, Hungary', description: 'St. Stephen\'s Basilica', caption: 'looked up for once' },
+    { src: 'image-26.webp', title: 'Philadelphia, PA', description: 'Theatre of Living Arts', caption: 'after brakence' },
+    { src: 'image-27.webp', title: 'Philadelphia, PA', description: 'The Mann Center', caption: 'yellowcard' },
+    { src: 'image-28.webp', title: 'Hudson, NY', description: 'Catskill Mountains', caption: 'ny in the fall' },
+    { src: 'image-29.webp', title: 'New York City, NY', description: 'World Trade Center', caption: 'there is someone standing on the roof' },
 ];
-
-const tripleImages = [...imageData, ...imageData, ...imageData];
 ---
 
 <div id="gallery-container" class="relative">
     <div id="gallery" data-set-size={imageData.length} class="gallery-viewport relative h-[18.75rem] sm:h-96">
         <div id="gallery-scroll-track" class="gallery-scroll-track absolute left-0 top-4 w-max">
             <div id="gallery-track" class="gallery-track flex w-max gap-5 sm:gap-8">
-            {tripleImages.map((image, imageIndex) => (
+            {imageData.map((image, imageIndex) => (
             <div
                 class={`polaroid group relative aspect-[4/5] w-56 flex-none text-zinc-900 transition-transform duration-300 ease-out cursor-pointer dark:text-neutral-100 sm:w-72 ${
-                    rotations[(imageIndex % imageData.length) % rotations.length]
+                    rotations[imageIndex % rotations.length]
                 } hover:rotate-0 hover:scale-105`}
             >
-                <button type="button" class="polaroid-button h-full w-full select-none text-left" aria-label={`Show field note for ${image.title}`}>
+                <button type="button" class="polaroid-button h-full w-full select-none text-left" aria-label={`${image.title} ${image.description}, show field note`}>
                     <span class="polaroid-inner relative block h-full w-full">
                         <span class="polaroid-face absolute inset-0 flex h-full flex-col bg-[#fffdf8] p-3 dark:bg-[#242424]">
                             <span class="aspect-square shrink-0 overflow-hidden bg-zinc-200 dark:bg-zinc-700">
-                                <img
-                                    src={image.src}
+                                <Image
+                                    src={photo(image.src)}
                                     alt={image.title}
+                                    widths={[240, 480]}
+                                    sizes="(min-width: 640px) 264px, 200px"
                                     class="h-full w-full object-cover select-none"
-                                    loading="eager"
+                                    loading={imageIndex < 6 ? 'eager' : 'lazy'}
                                     decoding="async"
                                     draggable="false"
                                 />
@@ -253,6 +258,21 @@ const tripleImages = [...imageData, ...imageData, ...imageData];
         const track = document.getElementById('gallery-track');
         const scrollTrack = document.getElementById('gallery-scroll-track');
         if (!gallery || !track || !scrollTrack) return;
+
+        if (!track.dataset.looped) {
+            const originals = Array.from(track.children);
+            const copySet = () =>
+                originals.map((node) => {
+                    const copy = node.cloneNode(true) as HTMLElement;
+                    copy.setAttribute('aria-hidden', 'true');
+                    copy.querySelectorAll('button').forEach((button) => button.setAttribute('tabindex', '-1'));
+                    copy.querySelectorAll('img').forEach((image) => (image.loading = 'lazy'));
+                    return copy;
+                });
+            track.prepend(...copySet());
+            track.append(...copySet());
+            track.dataset.looped = 'true';
+        }
 
         const polaroids = Array.from(track.querySelectorAll<HTMLElement>('.polaroid'));
         const setSize = Number(gallery.dataset.setSize);
