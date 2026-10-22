@@ -17,7 +17,11 @@ export async function GET(context) {
             title: item.data.title,
             description: item.data.excerpt,
             link,
-            pubDate: item.data.publishDate.setUTCHours(0)
+            pubDate: new Date(Date.UTC(
+                item.data.publishDate.getUTCFullYear(),
+                item.data.publishDate.getUTCMonth(),
+                item.data.publishDate.getUTCDate()
+            ))
         }))
     });
 }
