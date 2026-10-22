@@ -322,7 +322,7 @@ const isInSection = (href: string) => {
         const backdrop = nav.querySelector<HTMLButtonElement>('.index-backdrop');
         if (!trigger || !panel || !closeButton || !backdrop) return;
 
-        const folderStateKey = 'brandons-place:index-folders';
+        const folderStateKey = 'brandonsaldan.com:index-folders';
         const readFolderState = (): Record<string, boolean> => {
             try {
                 const stored = window.localStorage.getItem(folderStateKey);
